@@ -15,8 +15,8 @@
       var in1val = 0, in2val = 0, pwmval = 0;
       var absval = Math.abs(value);
       if (absval >= THRESHOLD) {
-        in1val = value >= 0 ? 0 : 1;
-        in2val = value <= 0 ? 0 : 1;
+        in1val = value <= 0 ? 0 : 1;
+        in2val = value >= 0 ? 0 : 1;
         pwmval = absval / 100.0;
       }
       console.log(this.in1, in1val);
