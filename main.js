@@ -30,4 +30,7 @@
     leftMoter.setValue(lv);
     rightMoter.setValue(rv);
   };
+  server.onFire = function() {
+    console.log('fire!!!');
+  };
 })();
