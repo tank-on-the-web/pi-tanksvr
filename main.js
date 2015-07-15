@@ -4,6 +4,7 @@
   var restify = require('restify');
   var tankmoter = require('./tank-moter.js');
   var http = require('./http-server.js');
+  var ws = require('./ws-server.js');
 
   var PORT = 7090;
 
@@ -18,6 +19,15 @@
   var leftMoter  = new tankmoter.TankMoter(L_IN1, L_IN2, L_PWM);
   var rightMoter = new tankmoter.TankMoter(R_IN1, R_IN2, R_PWM);
 
-  var server = new http.TankServer(leftMoter, rightMoter);
+  // var server = new http.Server();
+  var server = new ws.Server();
   server.run(PORT);
+  server.onMotor = function(param) {
+    var lv = param.lv;
+    var rv = param.rv;
+
+    console.log('lv=' + lv, 'rv=' + rv);
+    leftMoter.setValue(lv);
+    rightMoter.setValue(rv);
+  };
 })();

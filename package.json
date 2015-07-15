@@ -9,6 +9,7 @@
   "author": "flatbird",
   "dependencies": {
     "pi-blaster.js": "^0.1.1",
-    "restify": "~3.0.3"
+    "restify": "~3.0.3",
+    "ws": "~0.7.2"
   }
 }
