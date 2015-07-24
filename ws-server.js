@@ -17,11 +17,16 @@
         socket.on('message', function(message) {
           console.log('message: ' + message);
           var obj = JSON.parse(message);
-          self.onMotor(obj.motor);
+          if (obj.motor) {
+            self.onMotor(obj.motor);
+          }
           if (obj.fire && fired === false) {
             self.onFire(obj.fire);
           }
           fired = obj.fire;
+          if (obj.lockon) {
+            self.onLockOn(obj.lockon);
+          }
         });
       });
     };

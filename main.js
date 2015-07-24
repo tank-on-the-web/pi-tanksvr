@@ -6,6 +6,7 @@
   var http = require('./http-server.js');
   var ws = require('./ws-server.js');
 
+  var isLockOn = false;
   var PORT = 7090;
 
   // GPIO#
@@ -31,6 +32,15 @@
     rightMoter.setValue(rv);
   };
   server.onFire = function() {
-    console.log('fire!!!');
+    console.log('fire!');
+    var msg = { fire: true };
+    if (isLockOn) {
+      console.log('hit!!!');
+      msg.hit = true;
+    }
+    server.send(msg);
+  };
+  server.onLockOn = function(lockon) {
+    isLockOn = lockon;
   };
 })();
