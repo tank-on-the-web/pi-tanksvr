@@ -19,9 +19,7 @@
         in2val = value >= 0 ? 0 : 1;
         pwmval = absval / 100.0;
       }
-      console.log(this.in1, in1val);
-      console.log(this.in2, in2val);
-      console.log(this.pwm, pwmval);
+      console.log(this.in1+'='+in1val, this.in2+'='+in2val, this.pwm+'='+pwmval);
       blaster.setPwm(this.in1, in1val);
       blaster.setPwm(this.in2, in2val);
       blaster.setPwm(this.pwm, pwmval);
