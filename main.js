@@ -1,6 +1,7 @@
 (function () {
   'use strict';
 
+  var fs = require('fs');
   var restify = require('restify');
   var tankmoter = require('./tank-moter.js');
   var http = require('./http-server.js');
@@ -8,6 +9,8 @@
 
   var isLockOn = false;
   var PORT = 7090;
+  var HTTP_PORT = 7080;
+  var HTTP_PATH = './AR-tank-console/';
 
   // GPIO#
   var L_IN1 = 17;
@@ -43,4 +46,17 @@
   server.onLockOn = function(lockon) {
     isLockOn = lockon;
   };
+
+  if (fs.existsSync(HTTP_PATH)) {
+    var httpServer = require('http-server/lib/http-server');
+
+    var HTTP_ADDR = '0.0.0.0';
+    var options = { root: HTTP_PATH };
+
+    var server = httpServer.createServer(options);
+    server.listen(HTTP_PORT, HTTP_ADDR, function() {
+      console.log('listening on', HTTP_ADDR + ':' + HTTP_PORT);
+    });
+  }
+
 })();

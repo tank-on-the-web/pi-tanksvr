@@ -10,6 +10,7 @@
   "dependencies": {
     "pi-blaster.js": "^0.1.1",
     "restify": "~3.0.3",
-    "ws": "~0.7.2"
+    "ws": "~0.7.2",
+    "http-server": "~0.8.0"
   }
 }
