@@ -53,8 +53,8 @@
     var HTTP_ADDR = '0.0.0.0';
     var options = { root: HTTP_PATH };
 
-    var server = httpServer.createServer(options);
-    server.listen(HTTP_PORT, HTTP_ADDR, function() {
+    var httpd = httpServer.createServer(options);
+    httpd.listen(HTTP_PORT, HTTP_ADDR, function() {
       console.log(HTTP_PATH, 'listening on', HTTP_ADDR + ':' + HTTP_PORT);
     });
   }
