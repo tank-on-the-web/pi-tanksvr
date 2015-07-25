@@ -55,7 +55,7 @@
 
     var server = httpServer.createServer(options);
     server.listen(HTTP_PORT, HTTP_ADDR, function() {
-      console.log('listening on', HTTP_ADDR + ':' + HTTP_PORT);
+      console.log(HTTP_PATH, 'listening on', HTTP_ADDR + ':' + HTTP_PORT);
     });
   }
 
