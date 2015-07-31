@@ -10,8 +10,10 @@
       this.in1 = in1;
       this.in2 = in2;
       this.pwm = pwm;
+      this.val = 0;
     }
     TankMoter.prototype.setValue = function(value) {
+      this.val = value;
       var in1val = 0, in2val = 0, pwmval = 0;
       var absval = Math.abs(value);
       if (absval >= THRESHOLD) {
@@ -24,6 +26,9 @@
       blaster.setPwm(this.in2, in2val);
       blaster.setPwm(this.pwm, pwmval);
     };
+    TankMoter.prototype.getValue = function() {
+      return this.val;
+    }
     return TankMoter;
   })();
 })();

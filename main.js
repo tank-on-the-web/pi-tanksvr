@@ -23,6 +23,23 @@
   var leftMoter  = new tankmoter.TankMoter(L_IN1, L_IN2, L_PWM);
   var rightMoter = new tankmoter.TankMoter(R_IN1, R_IN2, R_PWM);
 
+  // if no input longer than the interval, set the motor to 0
+  var failSafeTimestamp = 0;
+  var failSafeTimestampLastTime = 0;
+  var failSafeTimer = setInterval(
+    function() {
+      if (failSafeTimestamp === failSafeTimestampLastTime) {
+        if (leftMoter.getValue() != 0 || rightMoter.getValue() != 0) {
+          console.log('!!! fail safe !!!')
+          leftMoter.setValue(0);
+          rightMoter.setValue(0);
+        }
+      }
+      failSafeTimestampLastTime = failSafeTimestamp;
+    },
+    1000 // fail safe interval
+  );
+
   // var server = new http.Server();
   var server = new ws.Server();
   server.run(PORT);
@@ -33,6 +50,7 @@
     console.log('lv=' + lv, 'rv=' + rv);
     leftMoter.setValue(lv);
     rightMoter.setValue(rv);
+    failSafeTimestamp = Date.now();
   };
   server.onFire = function() {
     console.log('fire!');
